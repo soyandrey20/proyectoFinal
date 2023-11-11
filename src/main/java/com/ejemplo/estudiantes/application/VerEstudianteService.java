@@ -17,12 +17,29 @@ public class VerEstudianteService {
     public List<Estudiante> obtenerEstudiantes() {
         return verEstudianteRepository.findAll().stream()
                 .map(estudianteEntity ->
-                    Estudiante.builder()
-                            .id(estudianteEntity.getId())
-                            .edad(estudianteEntity.getEdad())
-                            .nombre(estudianteEntity.getNombre())
-                            .apellido(estudianteEntity.getApellido())
-                            .build())
+                        Estudiante.builder()
+                                .id(estudianteEntity.getId())
+                                .edad(estudianteEntity.getEdad())
+                                .nombre(estudianteEntity.getNombre())
+                                .apellido(estudianteEntity.getApellido())
+                                .build())
                 .collect(Collectors.toList());
     }
+
+    public Estudiante obtenerEstudiante() {
+
+        return verEstudianteRepository.findById(2l).stream()
+                .map(estudianteEntity ->
+                        Estudiante.builder()
+                                .id(estudianteEntity.getId())
+                                .edad(estudianteEntity.getEdad())
+                                .nombre(estudianteEntity.getNombre())
+                                .apellido(estudianteEntity.getApellido())
+                                .build())
+                .findAny()
+                .orElse(null);
+
+
+    }
+
 }
