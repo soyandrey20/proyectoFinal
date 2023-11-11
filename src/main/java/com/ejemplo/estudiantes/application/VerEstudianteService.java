@@ -1,7 +1,7 @@
 package com.ejemplo.estudiantes.application;
 
 import com.ejemplo.estudiantes.domain.Estudiante;
-import com.ejemplo.estudiantes.infrastructure.repository.VerEstudianteRepository;
+import com.ejemplo.estudiantes.infrastructure.repository.EstudianteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,12 +10,13 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+
 public class VerEstudianteService {
 
-    private final VerEstudianteRepository verEstudianteRepository;
+    private final EstudianteRepository estudianteRepository;
 
     public List<Estudiante> obtenerEstudiantes() {
-        return verEstudianteRepository.findAll().stream()
+        return estudianteRepository.findAll().stream()
                 .map(estudianteEntity ->
                         Estudiante.builder()
                                 .id(estudianteEntity.getId())
@@ -26,9 +27,9 @@ public class VerEstudianteService {
                 .collect(Collectors.toList());
     }
 
-    public Estudiante obtenerEstudiante() {
+    public Estudiante obtenerEstudiante(long id) {
 
-        return verEstudianteRepository.findById(2l).stream()
+        return estudianteRepository.findById(id)
                 .map(estudianteEntity ->
                         Estudiante.builder()
                                 .id(estudianteEntity.getId())
@@ -36,8 +37,7 @@ public class VerEstudianteService {
                                 .nombre(estudianteEntity.getNombre())
                                 .apellido(estudianteEntity.getApellido())
                                 .build())
-                .findAny()
-                .orElse(null);
+                .orElseThrow(() -> new RuntimeException("usuario no existe"));
 
 
     }

@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("estudiantes")
 @RequiredArgsConstructor
 public class ActualizarEstudianteController {
-    @PostMapping("/actualizar/{id}")
+    @PostMapping("/{id}")
 
     public void actualizarEstudiante(@PathVariable long id, Estudiante estudiante) {
         log.info("Se están pidiendo todos los estudiantes");
+
     }
 }
 
