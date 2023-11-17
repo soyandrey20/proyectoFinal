@@ -15,7 +15,7 @@ public class ActualizarEstudianteController {
 
     private final ModificarEstudianteService modificarEstudianteService;
 
-    @PutMapping("/ac/{id}")
+    @PutMapping("/{id}")
     public Estudiante actualizarEstudiante(@PathVariable long id, @RequestBody Estudiante estudiante) {
 
 
